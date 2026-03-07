@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KGL Portal - Karibu Groceries</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Image -->
+    <div class="background" style="background-image: url('assets/images/login.jpg');">
+        <div class="overlay"></div>
+    </div>
+
+    <!-- Main login container -->
+    <div class="login-card">
+        <div class="card-logo">
+            <!-- image logo -->
+            <img src="assets/images/KGL_logo.png" alt="KGL Logo" class="logo-image">
+        </div>
+
+        <!-- Card Header -->
+        <div class="card-header">
+            <h1>KGL Portal</h1>
+            <p>Enter your credentials to access your dashboard</p>
+        </div>
+
+        <!-- Error Message Container -->
+        <div class="error-message" id="errorMessage" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i>
+            <span id="errorText"></span>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <!-- spinner -->
+            <div class="spinner"></div>
+            <span>Authenticating...</span>
+        </div>
+
+        <!-- Login Form -->
+        <form class="login-form" id="loginForm">
+            <!-- Username Field -->
+            <div class="input-field">
+                <label for="username">
+                    <i class="far fa-user-circle"></i>
+                    Username
+                </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    placeholder="Enter your username" 
+                    value=""
+                    autocomplete="off"
+                    required
+                >
+            </div>
+
+            <!-- Password Field -->
+            <div class="input-field">
+                <label for="password">
+                    <i class="fas fa-lock"></i>
+                    Password
+                </label>
+                <!-- password-wrapper -->
+                <div class="password-wrapper">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        value=""
+                        required
+                    >
+                    <button type="button" class="toggle-password" tabindex="-1">
+                        <i class="far fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Options -->
+            <div class="options">
+                <label class="checkbox">
+                    <input type="checkbox" id="rememberMe">
+                    <span>Remember me</span>
+                </label>
+            </div>
+
+            <!-- Login Button -->
+            <button type="submit" class="login-button" id="loginButton">
+                <span>Secure Login</span>
+            </button>
+        </form>
+
+        <!-- Company Info -->
+        <div class="company-info">
+            <p><i class="fas fa-copyright"></i> 2026 Karibu Groceries Ltd. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- Page Scripts -->
+    <script src="js/config/runtime.js"></script>
+    <script src="js/config/api.js"></script>
+    <script src="js/utils/alerts.js"></script>
+    <script src="js/auth/login.js"></script>
+</body>
+</html>

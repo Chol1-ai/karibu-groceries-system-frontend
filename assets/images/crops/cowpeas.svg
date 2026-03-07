@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#d8ecff"/>
+      <stop offset="1" stop-color="#b8dbff"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" fill="url(#g)"/>
+  <ellipse cx="74" cy="92" rx="28" ry="20" fill="#2b7cd3"/>
+  <ellipse cx="114" cy="104" rx="28" ry="20" fill="#3d8ee3"/>
+  <ellipse cx="100" cy="74" rx="24" ry="16" fill="#539ee9"/>
+  <text x="100" y="182" font-size="22" text-anchor="middle" fill="#1f5f9e" font-family="Arial, sans-serif">COWPEAS</text>
+</svg>

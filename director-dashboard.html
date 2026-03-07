@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Director Dashboard - Karibu Groceries</title>
+        <link rel="stylesheet" href="css/director.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <!-- Dashboard Layout Wrapper -->
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <!-- sidebar-header -->
+                <div class="sidebar-header">
+                    <!-- logo -->
+                    <div class="logo">
+                        <span>KGL Director</span>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <!-- nav-section -->
+                    <div class="nav-section">
+                        <!-- nav-section-title -->
+                        <div class="nav-section-title">MAIN</div>
+                        <a href="#" class="nav-item active" data-page="dashboard">
+                            <span>Dashboard</span>
+                        </a>
+                    </div>
+
+                    <!-- nav-section -->
+                    <div class="nav-section">
+                        <!-- nav-section-title -->
+                        <div class="nav-section-title">ANALYTICS</div>
+                        <a href="#" class="nav-item" data-page="overview">
+                            <span>Overview</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="sales-summary">
+                            <span>Sales Summary</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="procurement-summary">
+                            <span>Procurement Summary</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="credit-summary">
+                            <span>Credit Summary</span>
+                        </a>
+                    </div>
+
+                    <!-- nav-section -->
+                    <div class="nav-section">
+                        <!-- nav-section-title -->
+                        <div class="nav-section-title">BRANCHES</div>
+                        <a href="#" class="nav-item" data-page="maganjo-branch">
+                            <span>Maganjo Branch</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="matugga-branch">
+                            <span>Matugga Branch</span>
+                        </a>
+                    </div>
+
+                    <!-- nav-section -->
+                    <div class="nav-section">
+                        <!-- nav-section-title -->
+                        <div class="nav-section-title">REPORTS</div>
+                        <a href="#" class="nav-item" data-page="reports">
+                            <span>Generate Reports</span>
+                        </a>
+                    </div>
+
+                    <!-- nav-section -->
+                    <div class="nav-section">
+                        <a href="#" class="nav-item" data-page="password-requests">
+                            <span>Password Requests</span>
+                        </a>
+                        <a href="#" class="nav-item" data-page="profile">
+                            <span>Profile</span>
+                        </a>
+                    </div>
+                </nav>
+                <!-- sidebar-logout -->
+                <div class="sidebar-logout">
+                    <a href="login.html" class="nav-item logout-btn" data-page="logout">
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <!-- Top Header -->
+                <header class="content-header">
+                    <!-- header-left -->
+                    <div class="header-left">
+                        <button class="menu-toggle" id="menuToggle">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1>Executive Dashboard</h1>
+                    </div>
+                    <!-- header-right -->
+                    <div class="header-right">
+                        <!-- Div Section -->
+                        <div
+                            class="header-notifications"
+                            id="headerNotifications"
+                            role="button"
+                            tabindex="0"
+                            aria-label="Open notifications"
+                        >
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge" id="headerNotificationsBadge">0</span>
+                        </div>
+                        <button
+                            class="header-user-info"
+                            id="headerProfileBtn"
+                            type="button"
+                            aria-label="Open profile"
+                        >
+                            <span class="user-avatar">
+                                <img
+                                    id="directorProfileImage"
+                                    src="assets/images/My_pic.png"
+                                    alt="Director profile"
+                                />
+                            </span>
+                            <span class="user-details">
+                                <span class="user-name" id="directorName">Mr. Orban</span>
+                                <span class="user-role" id="directorRole">Director</span>
+                            </span>
+                        </button>
+                        <!-- date-range -->
+                        <div class="date-range">
+                            <i class="far fa-calendar-alt"></i>
+                            <select id="dateRangeSelect">
+                                <option value="today">Today</option>
+                                <option value="week">This Week</option>
+                                <option value="month">This Month</option>
+                                <option value="quarter" selected>This Quarter</option>
+                                <option value="year">This Year</option>
+                            </select>
+                        </div>
+                        <button class="export-btn" id="exportBtn">
+                            <i class="fas fa-download"></i>
+                            Export
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Content Area -->
+                <div class="content-area" id="contentArea">
+                    <!-- Summary Cards (Aggregated for both branches) -->
+                    <div class="summary-grid">
+                        <!-- summary-card -->
+                        <div class="summary-card" id="cardRevenue" role="button" tabindex="0" aria-label="Show revenue contribution by branch">
+                            <!-- summary-header -->
+                            <div class="summary-header">
+                                <span class="summary-label">Total Revenue (Both Branches)</span>
+                                <i class="fas fa-arrow-up positive"></i>
+                            </div>
+                            <span class="summary-value" id="totalRevenue">UGX 98.4M</span>
+                            <span class="summary-period" id="revenueGrowth"
+                                >vs last quarter: +18.5%</span
+                            >
+                        </div>
+
+                        <!-- summary-card -->
+                        <div class="summary-card" id="cardSalesVolume" role="button" tabindex="0" aria-label="Show sales volume contribution by branch">
+                            <!-- summary-header -->
+                            <div class="summary-header">
+                                <span class="summary-label">Total Sales Volume</span>
+                                <i class="fas fa-arrow-up positive"></i>
+                            </div>
+                            <span class="summary-value" id="totalVolume">52,650 kg</span>
+                            <span class="summary-period" id="volumeGrowth"
+                                >vs last quarter: +12.8%</span
+                            >
+                        </div>
+
+                        <!-- summary-card -->
+                        <div class="summary-card" id="cardProcurements" role="button" tabindex="0" aria-label="Show procurements contribution by branch">
+                            <!-- summary-header -->
+                            <div class="summary-header">
+                                <span class="summary-label">Total Procurements</span>
+                                <i class="fas fa-arrow-up positive"></i>
+                            </div>
+                            <span class="summary-value" id="totalProcurements">64,700 kg</span>
+                            <span class="summary-period" id="procurementGrowth"
+                                >vs last quarter: +7.2%</span
+                            >
+                        </div>
+
+                        <!-- summary-card -->
+                        <div class="summary-card" id="cardCredit" role="button" tabindex="0" aria-label="Show outstanding credit contribution by branch">
+                            <!-- summary-header -->
+                            <div class="summary-header">
+                                <span class="summary-label">Outstanding Credit</span>
+                                <i class="fas fa-arrow-down negative"></i>
+                            </div>
+                            <span class="summary-value" id="outstandingCredit">UGX 8.1M</span>
+                            <span class="summary-period" id="creditChange"
+                                >vs last quarter: -4.3%</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Charts Section (Branch Comparison) -->
+                    <div class="charts-grid">
+                        <!-- chart-card -->
+                        <div class="chart-card">
+                            <!-- chart-header -->
+                            <div class="chart-header">
+                                <h3>Sales by Branch</h3>
+                                <select class="chart-filter" id="branchChartFilter">
+                                    <option value="quarter">This Quarter</option>
+                                    <option value="month">This Month</option>
+                                    <option value="year">This Year</option>
+                                </select>
+                            </div>
+                            <!-- chart-container -->
+                            <div class="chart-container">
+                                <!-- branch-chart-legend -->
+                                <div class="branch-chart-legend" aria-label="Branch color legend">
+                                    <span class="branch-legend-item">
+                                        <span class="branch-dot maganjo"></span>
+                                        Maganjo
+                                    </span>
+                                    <span class="branch-legend-item">
+                                        <span class="branch-dot matugga"></span>
+                                        Matugga
+                                    </span>
+                                </div>
+                                <!-- Chart bars - Visual representation of branch sales -->
+                                <div class="bar-chart" id="branchSalesChart">
+                                    <!-- bar-item -->
+                                    <div class="bar-item">
+                                        <!-- bar-label -->
+                                        <div class="bar-label">Maganjo Branch</div>
+                                        <!-- bar-progress -->
+                                        <div class="bar-progress">
+                                            <!-- Div Section -->
+                                            <div
+                                                class="bar-fill"
+                                                style="width: 100%; background: #2563eb"
+                                            >
+                                                <span id="maganjoSales">UGX 58.2M</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- bar-item -->
+                                    <div class="bar-item">
+                                        <!-- bar-label -->
+                                        <div class="bar-label">Matugga Branch</div>
+                                        <!-- bar-progress -->
+                                        <div class="bar-progress">
+                                            <!-- Div Section -->
+                                            <div
+                                                class="bar-fill"
+                                                style="width: 69%; background: #d97706"
+                                            >
+                                                <span id="matuggaSales">UGX 40.2M</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- chart-card -->
+                        <div class="chart-card">
+                            <!-- chart-header -->
+                            <div class="chart-header">
+                                <h3>Product Performance</h3>
+                                <select class="chart-filter" id="productChartFilter">
+                                    <option value="revenue">By Revenue</option>
+                                    <option value="volume">By Volume</option>
+                                </select>
+                            </div>
+                            <!-- chart-container -->
+                            <div class="chart-container">
+                                <!-- productPerformance -->
+                                <div id="productPerformance" class="product-performance">
+                                    <!-- product-donut-wrap -->
+                                    <div class="product-donut-wrap">
+                                        <!-- Div Section -->
+                                        <div
+                                            id="productDonut"
+                                            class="product-donut"
+                                            aria-label="Product performance chart"
+                                        ></div>
+                                        <!-- productDonutTotal -->
+                                        <div id="productDonutTotal" class="product-donut-total">
+                                            UGX 0
+                                        </div>
+                                    </div>
+                                    <!-- productLegend -->
+                                    <div id="productLegend" class="product-legend"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Branch Comparison Table (Maganjo vs Matugga) -->
+                    <div class="branch-overview">
+                        <!-- section-header -->
+                        <div class="section-header">
+                            <h2><i class="fas fa-store-alt"></i> Branch Performance Comparison</h2>
+                            <span class="update-time">Aggregated data - All branches</span>
+                        </div>
+
+                        <table class="branch-table" id="branchComparisonTable">
+                            <thead>
+                                <tr>
+                                    <th>Branch</th>
+                                    <th>Sales (UGX)</th>
+                                    <th>Volume (kg)</th>
+                                    <th>Procurements (kg)</th>
+                                    <th>Credit Outstanding</th>
+                                    <th>Performance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="maganjoRow">
+                                    <td>
+                                        <!-- branch-cell -->
+                                        <div class="branch-cell">
+                                            <i class="fas fa-store-alt"></i>
+                                            Maganjo Branch
+                                        </div>
+                                    </td>
+                                    <td id="maganjoSalesAmount">UGX 58.2M</td>
+                                    <td id="maganjoVolume">30,450 kg</td>
+                                    <td id="maganjoProcurements">36,200 kg</td>
+                                    <td id="maganjoCredit">UGX 4.6M</td>
+                                    <td>
+                                        <span class="badge success" id="maganjoPerformance"
+                                            >+12%</span
+                                        >
+                                    </td>
+                                </tr>
+                                <tr id="matuggaRow">
+                                    <td>
+                                        <!-- branch-cell -->
+                                        <div class="branch-cell">
+                                            <i class="fas fa-warehouse"></i>
+                                            Matugga Branch
+                                        </div>
+                                    </td>
+                                    <td id="matuggaSalesAmount">UGX 40.2M</td>
+                                    <td id="matuggaVolume">22,200 kg</td>
+                                    <td id="matuggaProcurements">28,500 kg</td>
+                                    <td id="matuggaCredit">UGX 3.5M</td>
+                                    <td>
+                                        <span class="badge warning" id="matuggaPerformance"
+                                            >+5%</span
+                                        >
+                                    </td>
+                                </tr>
+                                <tr class="total-row">
+                                    <td><strong>Total (Both Branches)</strong></td>
+                                    <td><strong id="totalSalesAmount">UGX 98.4M</strong></td>
+                                    <td><strong id="totalVolumeAmount">52,650 kg</strong></td>
+                                    <td><strong id="totalProcurementsAmount">64,700 kg</strong></td>
+                                    <td><strong id="totalCreditAmount">UGX 8.1M</strong></td>
+                                    <td><strong id="totalPerformance">+17% overall</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Branch Specific Quick Stats -->
+                    <div class="branch-stats-grid">
+                        <!-- branch-stat-card -->
+                        <div class="branch-stat-card maganjo">
+                            <!-- branch-stat-header -->
+                            <div class="branch-stat-header">
+                                <i class="fas fa-store-alt"></i>
+                                <h3>Maganjo Branch</h3>
+                            </div>
+                            <!-- branch-stat-body -->
+                            <div class="branch-stat-body">
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Today's Sales:</span>
+                                    <strong id="maganjoTodaySales">UGX 1.2M</strong>
+                                </div>
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Stock Value:</span>
+                                    <strong id="maganjoStockValue">UGX 24.5M</strong>
+                                </div>
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Active Credits:</span>
+                                    <strong id="maganjoActiveCredits">UGX 4.6M</strong>
+                                </div>
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Staff:</span>
+                                    <strong>1 Manager, 2 Agents</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- branch-stat-card -->
+                        <div class="branch-stat-card matugga">
+                            <!-- branch-stat-header -->
+                            <div class="branch-stat-header">
+                                <i class="fas fa-warehouse"></i>
+                                <h3>Matugga Branch</h3>
+                            </div>
+                            <!-- branch-stat-body -->
+                            <div class="branch-stat-body">
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Today's Sales:</span>
+                                    <strong id="matuggaTodaySales">UGX 980K</strong>
+                                </div>
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Stock Value:</span>
+                                    <strong id="matuggaStockValue">UGX 18.2M</strong>
+                                </div>
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Active Credits:</span>
+                                    <strong id="matuggaActiveCredits">UGX 3.5M</strong>
+                                </div>
+                                <!-- branch-stat-row -->
+                                <div class="branch-stat-row">
+                                    <span>Staff:</span>
+                                    <strong>1 Manager, 2 Agents</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- Page Scripts -->
+        <script src="js/config/runtime.js"></script>
+        <script src="js/config/api.js"></script>
+        <script src="js/auth/logout.js"></script>
+        <script src="js/utils/validation.js"></script>
+        <script src="js/utils/formatting.js"></script>
+        <script src="js/utils/alerts.js"></script>
+        <script src="js/shared/notifications.js"></script>
+        <script src="js/shared/navbar.js"></script>
+        <script src="js/shared/sidebar.js"></script>
+        <script src="js/director/director-dashboard.js"></script>
+        <script src="js/director/analytics.js"></script>
+        <script src="js/director/summaries.js"></script>
+        <script src="js/director/charts.js"></script>
+        <script src="js/director/approvals.js"></script>
+    </body>
+</html>

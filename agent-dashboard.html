@@ -1,0 +1,350 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Agent Dashboard - Karibu Groceries</title>
+    <link rel="stylesheet" href="css/agent.css?v=20260228d">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Dashboard Layout Wrapper -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- sidebar-header -->
+            <div class="sidebar-header">
+                <!-- logo -->
+                <div class="logo">
+                    <span>KGL Agent</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <!-- nav-section -->
+                <div class="nav-section">
+                    <!-- nav-section-title -->
+                    <div class="nav-section-title">MAIN</div>
+                    <a href="#" class="nav-item active" data-page="dashboard">
+                        <span>Dashboard</span>
+                    </a>
+                </div>
+
+                <!-- nav-section -->
+                <div class="nav-section">
+                    <button type="button" class="nav-parent" data-target="salesSubmenu" aria-expanded="true">
+                        <span>Sales</span>
+                        <span class="nav-caret"></span>
+                    </button>
+                    <!-- salesSubmenu -->
+                    <div class="nav-submenu open" id="salesSubmenu">
+                        <a href="#" class="nav-item nav-subitem" data-page="new-sale">
+                            <span>New Sale</span>
+                        </a>
+                        <a href="#" class="nav-item nav-subitem" data-page="credit-sale">
+                            <span>Credit Sale</span>
+                        </a>
+                        <a href="#" class="nav-item nav-subitem" data-page="sales-history">
+                            <span>My Sales</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- nav-section -->
+                <div class="nav-section">
+                    <button type="button" class="nav-parent" data-target="inventorySubmenu" aria-expanded="true">
+                        <span>Inventory</span>
+                        <span class="nav-caret"></span>
+                    </button>
+                    <!-- inventorySubmenu -->
+                    <div class="nav-submenu open" id="inventorySubmenu">
+                        <a href="#" class="nav-item nav-subitem" data-page="check-stock">
+                            <span>Check Stock</span>
+                        </a>
+                        <a href="#" class="nav-item nav-subitem" data-page="prices">
+                            <span>View Prices</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- nav-section -->
+                <div class="nav-section">
+                    <a href="#" class="nav-item" data-page="profile">
+                        <span>Profile</span>
+                    </a>
+                </div>
+            </nav>
+            <!-- sidebar-logout -->
+            <div class="sidebar-logout">
+                <a href="login.html" class="nav-item logout-btn" data-page="logout">
+                    <span>Logout</span>
+                </a>
+            </div>
+
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="content-header">
+                <!-- header-left -->
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Sales Dashboard</h1>
+                </div>
+                <!-- header-right -->
+                <div class="header-right">
+                    <!-- Branch Selection -->
+                    <div class="branch-info">
+                        <i class="fas fa-store"></i>
+                        <select id="agentBranchSelect" aria-label="Select branch">
+                            <option value="">Select Branch</option>
+                        </select>
+                    </div>
+                    <!-- Notifications -->
+                    <div class="header-notifications" id="headerNotifications" role="button" tabindex="0" aria-label="Open notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="headerNotificationsBadge">0</span>
+                    </div>
+                    <!-- Logged-in User Summary -->
+                    <button class="header-user-info" id="headerProfileBtn" type="button">
+                        <!-- user-avatar -->
+                        <div class="user-avatar">
+                            <img src="assets/images/My_pic.png" alt="Profile" id="agentProfileImage">
+                        </div>
+                        <!-- user-details -->
+                        <div class="user-details">
+                            <span class="user-name" id="agentName">John</span>
+                            <span class="user-role">Sales Agent</span>
+                        </div>
+                    </button>
+                    <!-- Current Date -->
+                    <div class="header-date">
+                        <i class="far fa-calendar"></i>
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area" id="contentArea">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <!-- Welcome Text -->
+                    <div class="welcome-text">
+                        <h2 id="welcomeMessage">Welcome John</h2>
+                        <p>Are you ready to hit your target today?</p>
+                    </div>
+                    <!-- Today's KPI Summary -->
+                    <div class="banner-stats">
+                        <!-- banner-stat -->
+                        <div class="banner-stat">
+                            <span class="banner-stat-label">Today's Sales</span>
+                            <span class="banner-stat-value" id="todaySales">UGX 1,250,000</span>
+                        </div>
+                        <!-- banner-stat -->
+                        <div class="banner-stat">
+                            <span class="banner-stat-label">Target</span>
+                            <span class="banner-stat-value" id="dailyTarget">UGX 2,000,000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Action Buttons -->
+                <div class="quick-action-grid">
+                    <!-- Action: New Cash Sale -->
+                    <button class="quick-action-card primary" id="newCashSaleBtn">
+                        <!-- Div Section -->
+                        <div>
+                            <h3>New Cash Sale</h3>
+                            <p>Record a new cash transaction</p>
+                        </div>
+                    </button>
+                    
+                    <!-- Action: New Credit Sale -->
+                    <button class="quick-action-card secondary" id="newCreditSaleBtn">
+                        <!-- Div Section -->
+                        <div>
+                            <h3>Credit Sale</h3>
+                            <p>Record a credit transaction</p>
+                        </div>
+                    </button>
+                    
+                    <!-- Action: Check Stock -->
+                    <button class="quick-action-card" id="checkStockBtn">
+                        <!-- Div Section -->
+                        <div>
+                            <h3>Check Stock</h3>
+                            <p>View available inventory</p>
+                        </div>
+                    </button>
+                    
+                    <!-- Action: View Performance -->
+                    <button class="quick-action-card" id="viewPerformanceBtn">
+                        <!-- Div Section -->
+                        <div>
+                            <h3>My Performance</h3>
+                            <p>View your sales stats</p>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Available Stock -->
+                <div class="stock-section">
+                    <!-- section-header -->
+                    <div class="section-header">
+                        <h2><i class="fas fa-boxes"></i> Available Stock</h2>
+                        <span class="update-time" id="stockUpdateTime">Updated 2 min ago</span>
+                    </div>
+                    
+                    <!-- Stock Cards Grid -->
+                    <div class="stock-grid" id="availableStockGrid">
+                        <!-- Stock Card: Beans -->
+                        <div class="stock-card" data-product="beans">
+                            <!-- stock-icon -->
+                            <div class="stock-icon">
+                                <img src="assets/images/beans.jpg" alt="Beans" class="crop-image">
+                            </div>
+                            <!-- stock-details -->
+                            <div class="stock-details">
+                                <h3>Beans</h3>
+                                <span class="stock-qty" id="beansStock">2,500 kg</span>
+                                <span class="stock-price" id="beansPrice">UGX 3,500/kg</span>
+                            </div>
+                        </div>
+
+                        <!-- Stock Card: Maize -->
+                        <div class="stock-card" data-product="maize">
+                            <!-- stock-icon -->
+                            <div class="stock-icon">
+                                <img src="assets/images/maize.jpg" alt="Maize" class="crop-image">
+                            </div>
+                            <!-- stock-details -->
+                            <div class="stock-details">
+                                <h3>Grain Maize</h3>
+                                <span class="stock-qty" id="maizeStock">5,800 kg</span>
+                                <span class="stock-price" id="maizePrice">UGX 4,000/kg</span>
+                            </div>
+                        </div>
+
+                        <!-- Stock Card: Cowpeas -->
+                        <div class="stock-card" data-product="cowpeas">
+                            <!-- stock-icon -->
+                            <div class="stock-icon">
+                                <img src="assets/images/cow_peas.jpg" alt="Cow peas" class="crop-image">
+                            </div>
+                            <!-- stock-details -->
+                            <div class="stock-details">
+                                <h3>Cow peas</h3>
+                                <span class="stock-qty" id="cowpeasStock">1,200 kg</span>
+                                <span class="stock-price" id="cowpeasPrice">UGX 4,500/kg</span>
+                            </div>
+                        </div>
+
+                        <!-- Stock Card: Groundnuts -->
+                        <div class="stock-card" data-product="gnuts">
+                            <!-- stock-icon -->
+                            <div class="stock-icon">
+                                <img src="assets/images/Gnuts.jpg" alt="Groundnuts" class="crop-image">
+                            </div>
+                            <!-- stock-details -->
+                            <div class="stock-details">
+                                <h3>G-nuts</h3>
+                                <span class="stock-qty" id="gnutsStock">800 kg</span>
+                                <span class="stock-price" id="gnutsPrice">UGX 6,000/kg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Sales -->
+                <div class="recent-sales">
+                    <!-- section-header -->
+                    <div class="section-header">
+                        <h2><i class="fas fa-clock"></i> Recent Sales</h2>
+                        <a href="#" class="view-link" id="viewAllSales">View All</a>
+                    </div>
+                    
+                    <!-- Recent Sales List -->
+                    <div class="sales-list" id="recentSalesList">
+                        <!-- sale-item -->
+                        <div class="sale-item">
+                            <!-- sale-info -->
+                            <div class="sale-info">
+                                <span class="sale-produce">Beans (500 kg)</span>
+                                <span class="sale-buyer">Buyer: John Mukasa</span>
+                            </div>
+                            <!-- sale-details -->
+                            <div class="sale-details">
+                                <span class="sale-amount">UGX 1,250,000</span>
+                                <span class="sale-time">10:30 AM</span>
+                            </div>
+                        </div>
+
+                        <!-- sale-item -->
+                        <div class="sale-item">
+                            <!-- sale-info -->
+                            <div class="sale-info">
+                                <span class="sale-produce">Maize (300 kg)</span>
+                                <span class="sale-buyer">Buyer: Alice Nakato</span>
+                            </div>
+                            <!-- sale-details -->
+                            <div class="sale-details">
+                                <span class="sale-amount">UGX 540,000</span>
+                                <span class="sale-time">09:45 AM</span>
+                            </div>
+                        </div>
+
+                        <!-- sale-item -->
+                        <div class="sale-item">
+                            <!-- sale-info -->
+                            <div class="sale-info">
+                                <span class="sale-produce">Soybeans (200 kg)</span>
+                                <span class="sale-buyer">Buyer: Peter Okello</span>
+                            </div>
+                            <!-- sale-details -->
+                            <div class="sale-details">
+                                <span class="sale-amount">UGX 600,000</span>
+                                <span class="sale-time">09:15 AM</span>
+                            </div>
+                        </div>
+
+                        <!-- sale-item -->
+                        <div class="sale-item">
+                            <!-- sale-info -->
+                            <div class="sale-info">
+                                <span class="sale-produce">Cow peas (150 kg)</span>
+                                <span class="sale-buyer">Buyer: Grace Achieng</span>
+                            </div>
+                            <!-- sale-details -->
+                            <div class="sale-details">
+                                <span class="sale-amount">UGX 480,000</span>
+                                <span class="sale-time">08:30 AM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page Scripts -->
+    <script src="js/config/runtime.js"></script>
+    <script src="js/config/api.js"></script>
+    <script src="js/auth/logout.js"></script>
+    <script src="js/utils/validation.js"></script>
+    <script src="js/utils/formatting.js"></script>
+    <script src="js/utils/alerts.js"></script>
+    <script src="js/shared/notifications.js"></script>
+    <script src="js/shared/navbar.js"></script>
+    <script src="js/shared/sidebar.js"></script>
+    <script src="js/agent/agent-dashboard.js?v=20260307a"></script>
+    <script src="js/agent/sales.js?v=20260307a"></script>
+    <script src="js/agent/credit-sales.js?v=20260228d"></script>
+    <script src="js/agent/stock-check.js?v=20260228d"></script>
+</body>
+</html>
+

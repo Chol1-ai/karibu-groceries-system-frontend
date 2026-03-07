@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manager Dashboard - Karibu Groceries</title>
+    <link rel="stylesheet" href="css/manager.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dashboard Layout Wrapper -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- sidebar-header -->
+            <div class="sidebar-header">
+                <!-- logo -->
+                <div class="logo">
+                    <span>KGL Manager</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <!-- nav-section -->
+                <div class="nav-section">
+                    <!-- nav-section-title -->
+                    <div class="nav-section-title">MAIN</div>
+                    <a href="#" class="nav-item active" data-page="dashboard">
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="procurement">
+                        <span>Procurement</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="inventory">
+                        <span>Inventory</span>
+                    </a>
+                </div>
+
+                <!-- nav-section -->
+                <div class="nav-section">
+                    <!-- nav-section-title -->
+                    <div class="nav-section-title">SALES</div>
+                    <a href="#" class="nav-item" data-page="sales-view">
+                        <span>Sales Overview</span>
+                    </a>
+                    <a href="#" class="nav-item" data-page="credit-view">
+                        <span>Credit Sales</span>
+                    </a>
+                </div>
+
+                <!-- nav-section -->
+                <div class="nav-section">
+                    <!-- nav-section-title -->
+                    <div class="nav-section-title">ALERTS</div>
+                    <a href="#" class="nav-item" data-page="notifications">
+                        <span>Notifications</span>
+                        <span class="badge" id="sidebarNotificationsBadge">3</span>
+                    </a>
+                </div>
+
+                <!-- nav-section -->
+                <div class="nav-section">
+                </div>
+            </nav>
+            <!-- sidebar-logout -->
+            <div class="sidebar-logout">
+                <a href="login.html" class="nav-item logout-btn" data-page="logout">
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <header class="content-header">
+                <!-- header-left -->
+                <div class="header-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1>Dashboard Overview</h1>
+                </div>
+                <!-- header-right -->
+                <div class="header-right">
+                    <!-- Branch Filter -->
+                    <div class="branch-selector">
+                        <i class="fas fa-store"></i>
+                        <select id="branchSelector">
+                            <option value="maganjo">Maganjo Branch</option>
+                            <option value="matugga">Matugga Branch</option>
+                        </select>
+                    </div>
+                    <!-- Notifications -->
+                    <div class="header-notifications" id="headerNotifications" role="button" tabindex="0" aria-label="Open notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="headerNotificationsBadge">3</span>
+                    </div>
+                    <!-- Logged-in User Summary -->
+                    <button class="header-user-info" id="headerProfileBtn" type="button">
+                        <!-- user-avatar -->
+                        <div class="user-avatar">
+                            <img src="assets/images/My_pic.png" alt="Profile" id="managerProfileImage">
+                        </div>
+                        <!-- user-details -->
+                        <div class="user-details">
+                            <span class="user-name" id="managerName">Patrick</span>
+                            <span class="user-role">Branch Manager</span>
+                        </div>
+                    </button>
+                    <!-- Current Date -->
+                    <div class="header-date">
+                        <i class="far fa-calendar"></i>
+                        <span id="currentDate"></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Area -->
+            <div class="content-area" id="contentArea">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <!-- Stat Card: Total Stock -->
+                    <div class="stat-card" id="cardTotalStock" role="button" tabindex="0" aria-label="Open inventory details">
+                        <!-- stat-details -->
+                        <div class="stat-details">
+                            <span class="stat-label">Total Stock</span>
+                            <span class="stat-value" id="totalStock">45,890 kg</span>
+                            <span class="stat-change positive" id="stockChange">+12% from last month</span>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card: Today's Sales -->
+                    <div class="stat-card" id="cardTodaySales" role="button" tabindex="0" aria-label="Open sales report">
+                        <!-- stat-details -->
+                        <div class="stat-details">
+                            <span class="stat-label">Today's Sales</span>
+                            <span class="stat-value" id="todaySales">2,450 kg</span>
+                            <span class="stat-change" id="todaySalesValue">UGX 4,900,000</span>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card: Credit Due -->
+                    <div class="stat-card" id="cardCreditDue" role="button" tabindex="0" aria-label="Open credit overview">
+                        <!-- stat-details -->
+                        <div class="stat-details">
+                            <span class="stat-label">Credit Due</span>
+                            <span class="stat-value" id="creditDue">UGX 3.2M</span>
+                            <span class="stat-change warning" id="overdueCount">8 overdue</span>
+                        </div>
+                    </div>
+
+                    <!-- Stat Card: Low Stock -->
+                    <div class="stat-card" id="cardLowStock" role="button" tabindex="0" aria-label="Open low stock items">
+                        <!-- Div: .stat-details -->
+                        <div class="stat-details">
+                            <span class="stat-label">Low Stock Items</span>
+                            <span class="stat-value" id="lowStockCount">4 items</span>
+                            <span class="stat-change">Need reorder</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h2>Quick Actions</h2>
+                    <!-- Action Buttons Grid -->
+                    <div class="action-buttons">
+                        <!-- Action: New Procurement -->
+                        <button class="action-btn" id="newProcurementBtn">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>New Procurement</span>
+                        </button>
+                        <!-- Action: Record Sale -->
+                        <button class="action-btn" id="recordSaleBtn">
+                            <i class="fas fa-cash-register"></i>
+                            <span>Record Sale</span>
+                        </button>
+                        <!-- Action: Sales Report -->
+                        <button class="action-btn" id="salesReportBtn">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Sales Report</span>
+                        </button>
+                        <!-- Action: Credit Overview -->
+                        <button class="action-btn" id="creditOverviewBtn">
+                            <i class="fas fa-file-invoice"></i>
+                            <span>Credit Overview</span>
+                        </button>
+                        <!-- Action: Manage Stock & Prices -->
+                        <button class="action-btn" id="manageStockBtn">
+                            <i class="fas fa-warehouse"></i>
+                            <span>Manage Stock & Prices</span>
+                        </button>
+                        <!-- Action: Settings -->
+                        <button class="action-btn" id="settingsBtn">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="recent-grid">
+                    <!-- Recent Procurements Card -->
+                    <div class="recent-card">
+                        <!-- card-header -->
+                        <div class="card-header">
+                            <h3><i class="fas fa-shopping-cart"></i> Recent Procurements</h3>
+                            <a href="#" id="viewAllProcurements">View All</a>
+                        </div>
+                        <!-- card-content -->
+                        <div class="card-content">
+                            <table class="recent-table" id="recentProcurementsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Produce</th>
+                                        <th>Quantity</th>
+                                        <th>Cost</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Beans</td>
+                                        <td>2,500 kg</td>
+                                        <td>UGX 7.5M</td>
+                                        <td class="js-relative-date" data-days-offset="0">--</td>
+                                        <td><a href="#" aria-label="View procurement details for Beans">View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Maize</td>
+                                        <td>5,000 kg</td>
+                                        <td>UGX 10M</td>
+                                        <td class="js-relative-date" data-days-offset="-1">--</td>
+                                        <td><a href="#" aria-label="View procurement details for Maize">View</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Soybeans</td>
+                                        <td>1,800 kg</td>
+                                        <td>UGX 5.4M</td>
+                                        <td class="js-relative-date" data-days-offset="-3">--</td>
+                                        <td><a href="#" aria-label="View procurement details for Soybeans">View</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Pending Credits Card -->
+                    <div class="recent-card">
+                        <!-- card-header -->
+                        <div class="card-header">
+                            <h3><i class="fas fa-clock"></i> Pending Credits</h3>
+                            <a href="#" id="viewAllCredits">View All</a>
+                        </div>
+                        <!-- pendingCreditsList -->
+                        <div class="card-content" id="pendingCreditsList">
+                            <!-- credit-item -->
+                            <div class="credit-item">
+                                <!-- credit-info -->
+                                <div class="credit-info">
+                                    <span class="credit-name">James Ouma</span>
+                                    <span class="credit-detail js-due-date" data-days-offset="14">Due: --</span>
+                                </div>
+                                <span class="credit-amount">UGX 850,000</span>
+                            </div>
+                            <!-- credit-item -->
+                            <div class="credit-item">
+                                <!-- credit-info -->
+                                <div class="credit-info">
+                                    <span class="credit-name">Sarah Nabatanzi</span>
+                                    <span class="credit-detail js-due-date" data-days-offset="12">Due: --</span>
+                                </div>
+                                <span class="credit-amount">UGX 1,200,000</span>
+                            </div>
+                            <!-- credit-item -->
+                            <div class="credit-item">
+                                <!-- credit-info -->
+                                <div class="credit-info">
+                                    <span class="credit-name">John Mukasa</span>
+                                    <span class="credit-detail overdue">Overdue by 5 days</span>
+                                </div>
+                                <span class="credit-amount">UGX 500,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Page Scripts -->
+    <script src="js/config/runtime.js"></script>
+    <script src="js/config/api.js"></script>
+    <script src="js/auth/logout.js"></script>
+    <script src="js/utils/validation.js"></script>
+    <script src="js/utils/formatting.js"></script>
+    <script src="js/utils/alerts.js"></script>
+    <script src="js/shared/notifications.js"></script>
+    <script src="js/shared/navbar.js"></script>
+    <script src="js/shared/sidebar.js"></script>
+    <script src="js/manager/manager-dashboard.js?v=20260228d"></script>
+    <script src="js/manager/procurement.js?v=20260228d"></script>
+    <script src="js/manager/inventory.js?v=20260307a"></script>
+    <script src="js/manager/sales-view.js?v=20260307b"></script>
+    <script src="js/manager/credit-view.js?v=20260224a"></script>
+</body>
+</html>
+
+
+
+
