@@ -17,12 +17,13 @@ module.exports = async (req, res) => {
         });
     }
 
-    const pathSegments = Array.isArray(req.query.path)
-        ? req.query.path
-        : [req.query.path].filter(Boolean);
-    const queryStart = req.url.indexOf('?');
-    const query = queryStart >= 0 ? req.url.slice(queryStart) : '';
-    const targetUrl = `${backendBase}/api/v1/${pathSegments.join('/')}${query}`;
+    const rawUrl = String(req.url || '');
+    const queryStart = rawUrl.indexOf('?');
+    const pathname = queryStart >= 0 ? rawUrl.slice(0, queryStart) : rawUrl;
+    const query = queryStart >= 0 ? rawUrl.slice(queryStart) : '';
+    const upstreamPath = pathname.replace(/^\/api\/v1\/?/, '');
+    const suffix = upstreamPath ? `/${upstreamPath}` : '';
+    const targetUrl = `${backendBase}/api/v1${suffix}${query}`;
 
     const outgoingHeaders = { ...req.headers };
     delete outgoingHeaders.host;
